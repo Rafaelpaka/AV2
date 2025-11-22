@@ -1,8 +1,16 @@
 {
   "version": 2,
-  "dgSpecHash": "fS6b/dRt/yA=",
+  "dgSpecHash": "lrlXteRsO3s=",
   "success": true,
-  "projectFilePath": "C:\\Users\\TEMP.ACAD-UNIFESO.004\\source\\repos\\Service\\Service.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "C:\\Users\\PcGamer\\Desktop\\Trabalho Andre Poo\\backend av2 atualizado\\AV2\\API\\Service.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\PcGamer\\.nuget\\packages\\microsoft.extensions.apidescription.server\\9.0.0\\microsoft.extensions.apidescription.server.9.0.0.nupkg.sha512",
+    "C:\\Users\\PcGamer\\.nuget\\packages\\microsoft.openapi\\2.3.0\\microsoft.openapi.2.3.0.nupkg.sha512",
+    "C:\\Users\\PcGamer\\.nuget\\packages\\swashbuckle.aspnetcore\\10.0.1\\swashbuckle.aspnetcore.10.0.1.nupkg.sha512",
+    "C:\\Users\\PcGamer\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\10.0.1\\swashbuckle.aspnetcore.swagger.10.0.1.nupkg.sha512",
+    "C:\\Users\\PcGamer\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\10.0.1\\swashbuckle.aspnetcore.swaggergen.10.0.1.nupkg.sha512",
+    "C:\\Users\\PcGamer\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\10.0.1\\swashbuckle.aspnetcore.swaggerui.10.0.1.nupkg.sha512",
+    "C:\\Users\\PcGamer\\.nuget\\packages\\system.text.json\\8.0.5\\system.text.json.8.0.5.nupkg.sha512"
+  ],
   "logs": []
 }
