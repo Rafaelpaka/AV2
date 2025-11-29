@@ -1,6 +1,6 @@
 using System;
 
-namespace Domain.ValueObjects
+namespace AV2.Domain.ValueObjects
 {
     public class Dinheiro
     {
@@ -75,7 +75,7 @@ namespace Domain.ValueObjects
             };
         }
 
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
             if (obj is Dinheiro other)
                 return Valor == other.Valor && Moeda == other.Moeda;

@@ -1,7 +1,7 @@
-using system;
-using system.Text.RegularExpressions;
+using System;
+using System.Text.RegularExpressions;
 
-namespace Domain.ValueObjects
+namespace AV2.Domain.ValueObjects
 {
     public class Email
     {
@@ -12,24 +12,22 @@ namespace Domain.ValueObjects
             Endereco = endereco;
         }
 
-        public static Email Criar(string endereco)
+        public static Email Create(string endereco)
         {
-            if (string.IsNullOrEmpty(endereco))
-                throw new Exception("Email não pode ser vazio");
+            if (string.IsNullOrWhiteSpace(endereco))
+                throw new ArgumentException("Email não pode ser vazio.");
 
-            if (!Regex.IsMatch(endereco, @"^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$"))
-                throw new Exception("Email inválido");
+            if (!Regex.IsMatch(endereco, @"^[^@\s]+@[^@\s]+\.[^@\s]+$"))
+                throw new ArgumentException("Email inválido.");
 
-
-            return new Email(endereço.ToLower().Trim());
+            return new Email(endereco.ToLower().Trim());
         }
 
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
-           if (obj is Email other)
-                 return Endereco == other.Endereco;
+            if (obj is Email other)
+                return Endereco == other.Endereco;
             return false;
-                  
         }
 
         public override int GetHashCode()
@@ -42,20 +40,18 @@ namespace Domain.ValueObjects
             return Endereco;
         }
 
-
-        public static bool operator ==(Email a, Email b)
+        public static bool operator ==(Email? a, Email? b)
         {
-            if (referenceEquals(a, null) && referenceEquals(b, null))
+            if (ReferenceEquals(a, null) && ReferenceEquals(b, null))
                 return true;
-            if (referenceEquals(a, null) || referenceEquals(b, null))
+            if (ReferenceEquals(a, null) || ReferenceEquals(b, null))
                 return false;
             return a.Equals(b);
         }
 
-        public static bool operator !=(Email a, Email b)
+        public static bool operator !=(Email? a, Email? b)
         {
             return !(a == b);
         }
     }
-
 }

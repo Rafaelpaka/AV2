@@ -1,6 +1,6 @@
 using System.Collections.Generic;
-using Domain.Entities;
-namespace Domain.Interfaces
+using AV2.Domain.Entities;
+namespace AV2.Domain.Interfaces
 {
     public interface IProdutoRepository
     {

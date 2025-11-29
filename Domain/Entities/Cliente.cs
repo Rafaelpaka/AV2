@@ -1,8 +1,8 @@
 using System;
-using Domain.ValueObjects;
-using Domain.Exceptions;
+using AV2.Domain.ValueObjects;
+using AV2.Domain.Exceptions;
 
-namespace Domain.Entities
+namespace AV2.Domain.Entities
 {
     public class Cliente
     {
@@ -31,7 +31,6 @@ namespace Domain.Entities
             return cliente;
         }
 
-        // Métodos de comportamento
         public void AlterarNome(string nome)
         {
             if (string.IsNullOrWhiteSpace(nome))

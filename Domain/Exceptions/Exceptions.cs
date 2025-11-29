@@ -1,6 +1,6 @@
 using System;
 
-namespace Domain.Exceptions
+namespace AV2.Domain.Exceptions
 {
     // Exceção base do domínio
     public abstract class DomainException : Exception

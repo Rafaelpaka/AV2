@@ -1,8 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "TWL77KqDuLk=",
+  "dgSpecHash": "s+jDRoG3RHY=",
   "success": true,
-  "projectFilePath": "C:\\Users\\TEMP.ACAD-UNIFESO.004\\source\\repos\\Domain\\Domain.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "C:\\Users\\User\\Downloads\\AV2-main (2)\\AV2-main\\Domain\\Domain.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\User\\.nuget\\packages\\microsoft.netcore.app.ref\\8.0.22\\microsoft.netcore.app.ref.8.0.22.nupkg.sha512",
+    "C:\\Users\\User\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\8.0.22\\microsoft.windowsdesktop.app.ref.8.0.22.nupkg.sha512",
+    "C:\\Users\\User\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\8.0.22\\microsoft.aspnetcore.app.ref.8.0.22.nupkg.sha512"
+  ],
   "logs": []
 }

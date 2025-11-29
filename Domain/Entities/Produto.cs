@@ -1,8 +1,8 @@
 using System;
-using Domain.ValueObjects;
-using Domain.Exceptions;
+using AV2.Domain.ValueObjects;
+using AV2.Domain.Exceptions;
 
-namespace Domain.Entities
+namespace AV2.Domain.Entities
 {
     public class Produto
     {
@@ -15,14 +15,12 @@ namespace Domain.Entities
         public bool Ativo { get; private set; }
         public DateTime DataCriacao { get; private set; }
 
-        // Construtor privado
         private Produto()
         {
             DataCriacao = DateTime.Now;
             Ativo = true;
         }
 
-        // Factory Method
         public static Produto Create(string nome, string descricao, Dinheiro preco, 
                                      string categoria, int estoqueInicial)
         {
@@ -36,7 +34,6 @@ namespace Domain.Entities
             return produto;
         }
 
-        // Métodos de comportamento
         public void AlterarNome(string nome)
         {
             if (string.IsNullOrWhiteSpace(nome))
@@ -115,7 +112,6 @@ namespace Domain.Entities
             Ativo = true;
         }
 
-        // Método auxiliar para Entity Framework
         public decimal PrecoDecimal => Preco?.Valor ?? 0;
     }
 }

@@ -1,12 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Domain.ValueObjects;
-using Domain.Exceptions;
+using AV2.Domain.ValueObjects;
+using AV2.Domain.Exceptions;
 
-namespace Domain.Entities
+namespace AV2.Domain.Entities
 {
-    // Carrinho é um Aggregate Root
     public class Carrinho
     {
         public int IdCarrinho { get; private set; }
@@ -18,14 +17,12 @@ namespace Domain.Entities
         private readonly List<ItemCarrinho> _itens = new List<ItemCarrinho>();
         public IReadOnlyCollection<ItemCarrinho> Itens => _itens.AsReadOnly();
 
-        // Construtor privado
         private Carrinho()
         {
             DataCriacao = DateTime.Now;
-            DataExpiracao = DateTime.Now.AddDays(7); // Carrinho expira em 7 dias
+            DataExpiracao = DateTime.Now.AddDays(7);
         }
 
-        // Factory Method
         public static Carrinho Create(int idCliente, Cliente cliente)
         {
             if (cliente == null)
@@ -41,7 +38,6 @@ namespace Domain.Entities
             };
         }
 
-        // Métodos de comportamento
         public void AdicionarProduto(Produto produto, int quantidade = 1)
         {
             if (produto == null)
@@ -142,7 +138,6 @@ namespace Domain.Entities
             if (EstaExpirado())
                 throw new OperacaoNaoPermitidaException("Carrinho expirado.");
 
-           
             foreach (var item in _itens)
             {
                 if (!item.Produto.TemEstoqueDisponivel(item.Quantidade))
@@ -151,7 +146,6 @@ namespace Domain.Entities
         }
     }
 
-    
     public class ItemCarrinho
     {
         public int IdItemCarrinho { get; private set; }
@@ -201,7 +195,6 @@ namespace Domain.Entities
             return PrecoUnitario * Quantidade;
         }
 
-       
         public decimal PrecoUnitarioDecimal => PrecoUnitario?.Valor ?? 0;
     }
 }

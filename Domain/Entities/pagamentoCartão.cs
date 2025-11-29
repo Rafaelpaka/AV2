@@ -1,3 +1,10 @@
+using System;
+using System.Linq;
+using AV2.Domain.ValueObjects;
+using AV2.Domain.Exceptions;
+
+namespace AV2.Domain.Entities{
+
 public class PagamentoCartao : Pagamento
     {
         public string NumeroCartaoMascarado { get; private set; }
@@ -91,3 +98,4 @@ public class PagamentoCartao : Pagamento
 
         public override string ObterTipoPagamento() => "Cartão de Crédito";
     }
+}

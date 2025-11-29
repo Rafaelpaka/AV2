@@ -1,6 +1,7 @@
 using System;
+using System.Linq;
 
-namespace Domain.ValueObjects
+namespace AV2.Domain.ValueObjects
 {
     public class Endereco
     {
@@ -48,7 +49,6 @@ namespace Domain.ValueObjects
             if (string.IsNullOrWhiteSpace(cep))
                 throw new ArgumentException("CEP é obrigatório.");
 
-            // Remove caracteres não numéricos do CEP
             var cepLimpo = new string(cep.Where(char.IsDigit).ToArray());
             if (cepLimpo.Length != 8)
                 throw new ArgumentException("CEP deve ter 8 dígitos.");
@@ -79,7 +79,7 @@ namespace Domain.ValueObjects
             return $"{CEP.Substring(0, 5)}-{CEP.Substring(5, 3)}";
         }
 
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
             if (obj is Endereco other)
             {

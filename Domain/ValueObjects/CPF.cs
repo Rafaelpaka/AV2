@@ -1,7 +1,7 @@
 using System;
 using System.Linq;
 
-namespace Domain.ValueObjects
+namespace AV2.Domain.ValueObjects
 {
     public class CPF
     {
@@ -17,7 +17,6 @@ namespace Domain.ValueObjects
             if (string.IsNullOrWhiteSpace(cpf))
                 throw new ArgumentException("CPF não pode ser vazio.");
 
-            // Remove pontos, traços e espaços
             var cpfLimpo = new string(cpf.Where(char.IsDigit).ToArray());
 
             if (cpfLimpo.Length != 11)
@@ -31,11 +30,9 @@ namespace Domain.ValueObjects
 
         private static bool ValidarCPF(string cpf)
         {
-            // CPFs com todos dígitos iguais são inválidos
             if (cpf.Distinct().Count() == 1)
                 return false;
 
-            // Validação do primeiro dígito verificador
             int soma = 0;
             for (int i = 0; i < 9; i++)
                 soma += int.Parse(cpf[i].ToString()) * (10 - i);
@@ -46,7 +43,6 @@ namespace Domain.ValueObjects
             if (int.Parse(cpf[9].ToString()) != digito1)
                 return false;
 
-            // Validação do segundo dígito verificador
             soma = 0;
             for (int i = 0; i < 10; i++)
                 soma += int.Parse(cpf[i].ToString()) * (11 - i);
@@ -62,7 +58,7 @@ namespace Domain.ValueObjects
             return $"{Numero.Substring(0, 3)}.{Numero.Substring(3, 3)}.{Numero.Substring(6, 3)}-{Numero.Substring(9, 2)}";
         }
 
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
             if (obj is CPF other)
                 return Numero == other.Numero;
@@ -79,7 +75,7 @@ namespace Domain.ValueObjects
             return NumeroFormatado();
         }
 
-        public static bool operator ==(CPF a, CPF b)
+        public static bool operator ==(CPF? a, CPF? b)
         {
             if (ReferenceEquals(a, null) && ReferenceEquals(b, null))
                 return true;
@@ -88,7 +84,7 @@ namespace Domain.ValueObjects
             return a.Equals(b);
         }
 
-        public static bool operator !=(CPF a, CPF b)
+        public static bool operator !=(CPF? a, CPF? b)
         {
             return !(a == b);
         }

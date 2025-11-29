@@ -1,6 +1,6 @@
 using System;
 
-namespace Domain.Events
+namespace AV2.Domain.Events
 {
     // Interface base para todos os eventos de domínio
     public interface IDomainEvent

@@ -1,8 +1,8 @@
 using System;
-using Domain.ValueObjects;
-using Domain.Exceptions;
+using AV2.Domain.ValueObjects;
+using AV2.Domain.Exceptions;
 
-namespace Domain.Entities
+namespace AV2.Domain.Entities
 {
     public abstract class Pagamento
     {
@@ -67,7 +67,6 @@ namespace Domain.Entities
             Status = StatusPagamento.Estornado;
         }
 
-        // Propriedade auxiliar para EF
         public decimal ValorDecimal => Valor?.Valor ?? 0;
     }
 

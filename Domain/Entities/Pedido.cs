@@ -1,13 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Domain.ValueObjects;
-using Domain.Exceptions;
-using Domain.Events;
+using AV2.Domain.ValueObjects;
+using AV2.Domain.Exceptions;
+using AV2.Domain.Events;
 
-namespace Domain.Entities
+namespace AV2.Domain.Entities
 {
-    
     public class Pedido
     {
         public int IdPedido { get; private set; }
@@ -18,25 +17,20 @@ namespace Domain.Entities
         public DateTime? DataFinalizacao { get; private set; }
         public Endereco EnderecoEntrega { get; private set; }
 
-        
         private readonly List<ItemPedido> _itens = new List<ItemPedido>();
         public IReadOnlyCollection<ItemPedido> Itens => _itens.AsReadOnly();
 
-        
         public int? IdPagamento { get; private set; }
         public Pagamento Pagamento { get; private set; }
 
-        
         private readonly List<IDomainEvent> _domainEvents = new List<IDomainEvent>();
         public IReadOnlyCollection<IDomainEvent> DomainEvents => _domainEvents.AsReadOnly();
 
-        
         private Pedido()
         {
             DataPedido = DateTime.Now;
             Status = StatusPedido.AguardandoPagamento;
         }
-
 
         public static Pedido Create(Cliente cliente, Carrinho carrinho, Endereco enderecoEntrega)
         {
@@ -49,7 +43,6 @@ namespace Domain.Entities
             if (enderecoEntrega == null)
                 throw new ArgumentNullException(nameof(enderecoEntrega));
 
-            
             carrinho.ValidarParaFinalizacao();
 
             var pedido = new Pedido
@@ -59,13 +52,11 @@ namespace Domain.Entities
                 EnderecoEntrega = enderecoEntrega
             };
 
-            
             foreach (var itemCarrinho in carrinho.Itens)
             {
                 pedido._itens.Add(ItemPedido.CreateFromCarrinho(itemCarrinho));
             }
 
-            
             pedido.AdicionarEvento(new PedidoCriadoEvent(
                 pedido.IdPedido,
                 pedido.IdCliente,
@@ -75,7 +66,6 @@ namespace Domain.Entities
             return pedido;
         }
 
-       
         public void DefinirPagamento(Pagamento pagamento)
         {
             if (pagamento == null)
@@ -111,7 +101,6 @@ namespace Domain.Entities
             if (Status != StatusPedido.PagamentoConfirmado)
                 throw new TransicaoStatusInvalidaException(Status.ToString(), StatusPedido.EmSeparacao.ToString());
 
-            
             foreach (var item in _itens)
             {
                 item.Produto.RemoverEstoque(item.Quantidade);
@@ -147,7 +136,6 @@ namespace Domain.Entities
             if (Status == StatusPedido.Cancelado)
                 throw new OperacaoNaoPermitidaException("Pedido já está cancelado.");
 
-            
             if (Status == StatusPedido.EmSeparacao || Status == StatusPedido.EmTransporte)
             {
                 foreach (var item in _itens)
@@ -180,7 +168,6 @@ namespace Domain.Entities
             return Status != StatusPedido.Entregue && Status != StatusPedido.Cancelado;
         }
 
-        
         private void AdicionarEvento(IDomainEvent evento)
         {
             _domainEvents.Add(evento);
@@ -191,11 +178,9 @@ namespace Domain.Entities
             _domainEvents.Clear();
         }
 
-        
         public decimal TotalDecimal => CalcularTotal().Valor;
     }
 
-    
     public enum StatusPedido
     {
         AguardandoPagamento = 1,
@@ -206,7 +191,6 @@ namespace Domain.Entities
         Cancelado = 6
     }
 
-    
     public class ItemPedido
     {
         public int IdItemPedido { get; private set; }
@@ -236,7 +220,6 @@ namespace Domain.Entities
             return PrecoUnitario * Quantidade;
         }
 
-       
         public decimal PrecoUnitarioDecimal => PrecoUnitario?.Valor ?? 0;
     }
 }

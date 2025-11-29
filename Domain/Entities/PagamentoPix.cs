@@ -1,3 +1,11 @@
+using System;
+using AV2.Domain.ValueObjects;
+using AV2.Domain.Exceptions;
+
+namespace AV2.Domain.Entities
+{
+  
+
 public class PagamentoPix : Pagamento
     {
         public string ChavePix { get; private set; }
@@ -51,3 +59,4 @@ public class PagamentoPix : Pagamento
 
         public override string ObterTipoPagamento() => "PIX";
     }
+}

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
-using Domain.Entities;
+using AV2.Domain.Entities;
 
-namespace Domain.Interfaces
+namespace AV2.Domain.Interfaces
 {
     public interface ICarrinhoRepository
     {
