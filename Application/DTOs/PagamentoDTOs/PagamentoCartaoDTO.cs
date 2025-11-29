@@ -1,23 +1,13 @@
-using System.ComponentModel.DataAnnotations;
-
-namespace Application.DTOs.PagamentoDTOs
+namespace AV2.Application.DTOs.PagamentoDTOs
 {
     public class PagamentoCartaoDTO
     {
+        public int IdPedido { get; set; }
         public decimal Valor { get; set; }
-
-        [Required]
-        public string NumeroCartao { get; set; }
-
-        [Required]
-        public string NomeTitular { get; set; }
-
-        [Required]
-        public string Validade { get; set; }
-
-        [Required]
-        [MinLength(3)]
-        public string Cvv { get; set; }
+        public required string NumeroCartao { get; set; }
+        public required string NomeTitular { get; set; }
+        public required string Validade { get; set; }
+        public required string Cvv { get; set; }
         public int Parcelas { get; set; }
     }
 }

@@ -1,7 +1,11 @@
-using Domain.Entities;
-using Domain.Interfaces;
+using System;
+using System.Collections.Generic;
+using AV2.Domain.Entities;
+using AV2.Domain.Interfaces;
+using AV2.Domain.ValueObjects;
+using AV2.Application.DTOs.PedidoDTOs;
 
-namespace Application.Services
+namespace AV2.Application.Services
 {
     public class PedidoService
     {
@@ -16,25 +20,35 @@ namespace Application.Services
 
         public PedidoResponseDTO CriarPedido(PedidoCreateDTO dto)
         {
-            var carrinho = _carrinhoRepo.ObterPorId(dto.IdCarrinho);
+            var carrinho = _carrinhoRepo.ObterPorId(dto.IdCarrinho)
+                ?? throw new Exception("Carrinho não encontrado.");
 
-            var pedido = new Pedido
-            {
-                Cliente = carrinho.Cliente,
-                Status = "Aguardando Pagamento",
-                Total = carrinho.Total
-            };
+            // Criar um endereço padrão (ajuste conforme necessário)
+            // OPÇÃO 1: Usar endereço do cliente
+            var endereco = carrinho.Cliente.Endereco 
+                ?? Endereco.Create(
+                    logradouro: "Rua Padrão",
+                    numero: "S/N",
+                    complemento: "",
+                    bairro: "Centro",
+                    cidade: "Cidade",
+                    estado: "UF",
+                    cep: "00000000",
+                    pais: "Brasil"
+                );
+
+            // Usar o método factory estático
+            var pedido = Pedido.Create(carrinho.Cliente, carrinho, endereco);
 
             _pedidoRepo.Adicionar(pedido);
 
             return new PedidoResponseDTO
             {
                 IdPedido = pedido.IdPedido,
-                Status = pedido.Status,
-                Total = pedido.Total
+                Status = pedido.Status.ToString(),
+                Total = pedido.TotalDecimal
             };
         }
-
 
         public Pedido ObterPorId(int idPedido)
         {
@@ -46,11 +60,41 @@ namespace Application.Services
             return _pedidoRepo.ObterPorCliente(idCliente);
         }
 
-        public void AtualizarStatus(int idPedido, string status)
+        public void AtualizarStatus(int idPedido, string statusStr)
         {
-            var pedido = _pedidoRepo.ObterPorId(idPedido);
-            pedido.Status = status;
-            _pedidoRepo.Atualizar(pedido);
+            var pedido = _pedidoRepo.ObterPorId(idPedido)
+                ?? throw new Exception("Pedido não encontrado.");
+
+            // Converter string para enum e usar os métodos apropriados
+            if (Enum.TryParse<StatusPedido>(statusStr, true, out var novoStatus))
+            {
+                switch (novoStatus)
+                {
+                    case StatusPedido.PagamentoConfirmado:
+                        pedido.ConfirmarPagamento();
+                        break;
+                    case StatusPedido.EmSeparacao:
+                        pedido.IniciarSeparacao();
+                        break;
+                    case StatusPedido.EmTransporte:
+                        pedido.IniciarEnvio();
+                        break;
+                    case StatusPedido.Entregue:
+                        pedido.Entregar();
+                        break;
+                    case StatusPedido.Cancelado:
+                        pedido.Cancelar("Cancelado pelo usuário");
+                        break;
+                    default:
+                        throw new ArgumentException($"Transição para status {statusStr} não é permitida diretamente.");
+                }
+
+                _pedidoRepo.Atualizar(pedido);
+            }
+            else
+            {
+                throw new ArgumentException($"Status inválido: {statusStr}");
+            }
         }
     }
 }

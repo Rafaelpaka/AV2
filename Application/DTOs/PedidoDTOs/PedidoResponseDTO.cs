@@ -1,12 +1,9 @@
-using System;
-
-namespace Application.DTOs.PedidoDTOs
+namespace AV2.Application.DTOs.PedidoDTOs
 {
     public class PedidoResponseDTO
     {
         public int IdPedido { get; set; }
-        public string Status { get; set; }
+        public required string Status { get; set; }
         public decimal Total { get; set; }
-        public DateTime DataPedido { get; set; }
     }
 }

@@ -1,12 +1,9 @@
-using System.ComponentModel.DataAnnotations;
-
-namespace Application.DTOs.PagamentoDTOs
+namespace AV2.Application.DTOs.PagamentoDTOs
 {
     public class PagamentoPixDTO
     {
+        public int IdPedido { get; set; }
         public decimal Valor { get; set; }
-
-        [Required]
-        public string ChavePix { get; set; }
+        public required string ChavePix { get; set; }
     }
 }

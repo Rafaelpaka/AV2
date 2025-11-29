@@ -1,7 +1,11 @@
-using Domain.Entities;
-using Domain.Interfaces;
+using System;
+using System.Collections.Generic;
+using AV2.Domain.Entities;
+using AV2.Domain.Interfaces;
+using AV2.Domain.ValueObjects;
+using AV2.Application.DTOs.ClienteDTOs;
 
-namespace Application.Services
+namespace AV2.Application.Services
 {
     public class ClienteService
     {
@@ -14,7 +18,12 @@ namespace Application.Services
 
         public ClienteResponseDTO CriarCliente(ClienteCreateDTO dto)
         {
-            var cliente = new Cliente { Nome = dto.Nome };
+            // Criar Value Objects necessários
+            var email = Email.Create(dto.Email);
+            var cpf = CPF.Create(dto.CPF);
+            
+            // Usar o método factory estático
+            var cliente = Cliente.Create(dto.Nome, email, cpf);
 
             _clienteRepo.Adicionar(cliente);
 

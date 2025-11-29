@@ -1,4 +1,4 @@
-namespace Application.DTOs.CarrinhoDTOs
+namespace AV2.Application.DTOs.CarrinhoDTOs
 {
     public class CarrinhoCreateDTO
     {

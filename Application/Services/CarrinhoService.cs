@@ -1,27 +1,32 @@
-using Domain.Entities;
-using Domain.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using AV2.Domain.Entities;
+using AV2.Domain.Interfaces;
+using AV2.Application.DTOs.CarrinhoDTOs;
 
-namespace Application.Services
+namespace AV2.Application.Services
 {
     public class CarrinhoService
     {
         private readonly ICarrinhoRepository _carrinhoRepo;
         private readonly IProdutoRepository _produtoRepo;
+        private readonly IClienteRepository _clienteRepo;
 
-        public CarrinhoService(ICarrinhoRepository carrinhoRepo, IProdutoRepository produtoRepo)
+        public CarrinhoService(ICarrinhoRepository carrinhoRepo, IProdutoRepository produtoRepo, IClienteRepository clienteRepo)
         {
             _carrinhoRepo = carrinhoRepo;
             _produtoRepo = produtoRepo;
+            _clienteRepo = clienteRepo;
         }
 
         public CarrinhoResponseDTO CriarCarrinho(CarrinhoCreateDTO dto)
         {
-            var carrinho = new Carrinho
-            {
-                IdCliente = dto.IdCliente
-            };
+            var cliente = _clienteRepo.ObterPorId(dto.IdCliente)
+                ?? throw new Exception("Cliente não encontrado.");
+
+            // Usar o método factory estático
+            var carrinho = Carrinho.Create(dto.IdCliente, cliente);
 
             _carrinhoRepo.Adicionar(carrinho);
 
@@ -29,12 +34,12 @@ namespace Application.Services
             {
                 IdCarrinho = carrinho.IdCarrinho,
                 IdCliente = carrinho.IdCliente,
-                Total = carrinho.Total,
+                Total = carrinho.CalcularTotal().Valor,
                 Itens = new List<CarrinhoItemDTO>()
             };
         }
 
-        public CarrinhoResponseDTO AdicionarProduto(int idCarrinho, int idProduto)
+        public CarrinhoResponseDTO AdicionarProduto(int idCarrinho, int idProduto, int quantidade = 1)
         {
             var carrinho = _carrinhoRepo.ObterPorId(idCarrinho)
                 ?? throw new Exception("Carrinho não encontrado.");
@@ -42,7 +47,7 @@ namespace Application.Services
             var produto = _produtoRepo.ObterPorId(idProduto)
                 ?? throw new Exception("Produto não encontrado.");
 
-            carrinho.AdicionarProduto(produto);
+            carrinho.AdicionarProduto(produto, quantidade);
             _carrinhoRepo.Atualizar(carrinho);
 
             return MapCarrinhoToDTO(carrinho);
@@ -53,10 +58,7 @@ namespace Application.Services
             var carrinho = _carrinhoRepo.ObterPorId(idCarrinho)
                 ?? throw new Exception("Carrinho não encontrado.");
 
-            var produto = carrinho.Itens.FirstOrDefault(p => p.IdProduto == idProduto)
-                ?? throw new Exception("Produto não encontrado no carrinho.");
-
-            carrinho.RemoverProduto(produto);
+            carrinho.RemoverProduto(idProduto);
             _carrinhoRepo.Atualizar(carrinho);
 
             return MapCarrinhoToDTO(carrinho);
@@ -67,22 +69,21 @@ namespace Application.Services
             var carrinho = _carrinhoRepo.ObterPorId(idCarrinho)
                 ?? throw new Exception("Carrinho não encontrado.");
 
-            return carrinho.Total;
+            return carrinho.CalcularTotal().Valor;
         }
 
-        
         private CarrinhoResponseDTO MapCarrinhoToDTO(Carrinho carrinho)
         {
             return new CarrinhoResponseDTO
             {
                 IdCarrinho = carrinho.IdCarrinho,
                 IdCliente = carrinho.IdCliente,
-                Total = carrinho.Total,
-                Itens = carrinho.Itens.Select(p => new CarrinhoItemDTO
+                Total = carrinho.CalcularTotal().Valor,
+                Itens = carrinho.Itens.Select(item => new CarrinhoItemDTO
                 {
-                    IdProduto = p.IdProduto,
-                    Nome = p.Nome,
-                    Preco = p.Preco
+                    IdProduto = item.IdProduto,
+                    Nome = item.Produto?.Nome ?? "Produto não disponível",
+                    Preco = item.PrecoUnitarioDecimal
                 }).ToList()
             };
         }

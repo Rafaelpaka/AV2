@@ -1,0 +1,15 @@
+C:\Users\User\Downloads\AV2-main (2)\AV2-main\Infrastucture\obj\Debug\net8.0\Infrastucture.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\User\Downloads\AV2-main (2)\AV2-main\Infrastucture\obj\Debug\net8.0\Infrastucture.AssemblyInfoInputs.cache
+C:\Users\User\Downloads\AV2-main (2)\AV2-main\Infrastucture\obj\Debug\net8.0\Infrastucture.AssemblyInfo.cs
+C:\Users\User\Downloads\AV2-main (2)\AV2-main\Infrastucture\obj\Debug\net8.0\Infrastucture.csproj.CoreCompileInputs.cache
+C:\Users\User\Downloads\AV2-main (2)\AV2-main\Infrastucture\bin\Debug\net8.0\Infrastucture.deps.json
+C:\Users\User\Downloads\AV2-main (2)\AV2-main\Infrastucture\bin\Debug\net8.0\Infrastucture.dll
+C:\Users\User\Downloads\AV2-main (2)\AV2-main\Infrastucture\bin\Debug\net8.0\Infrastucture.pdb
+C:\Users\User\Downloads\AV2-main (2)\AV2-main\Infrastucture\bin\Debug\net8.0\Domain.dll
+C:\Users\User\Downloads\AV2-main (2)\AV2-main\Infrastucture\bin\Debug\net8.0\Domain.pdb
+C:\Users\User\Downloads\AV2-main (2)\AV2-main\Infrastucture\obj\Debug\net8.0\Infrastucture.csproj.AssemblyReference.cache
+C:\Users\User\Downloads\AV2-main (2)\AV2-main\Infrastucture\obj\Debug\net8.0\Infrastu.D9A2AE6E.Up2Date
+C:\Users\User\Downloads\AV2-main (2)\AV2-main\Infrastucture\obj\Debug\net8.0\Infrastucture.dll
+C:\Users\User\Downloads\AV2-main (2)\AV2-main\Infrastucture\obj\Debug\net8.0\refint\Infrastucture.dll
+C:\Users\User\Downloads\AV2-main (2)\AV2-main\Infrastucture\obj\Debug\net8.0\Infrastucture.pdb
+C:\Users\User\Downloads\AV2-main (2)\AV2-main\Infrastucture\obj\Debug\net8.0\ref\Infrastucture.dll
