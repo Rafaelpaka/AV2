@@ -1,7 +1,0 @@
-C:\Users\PcGamer\Desktop\Trabalho Andre Poo\backend av2 atualizado\AV2\Application\obj\Debug\net8.0\rpswa.dswa.cache.json
-C:\Users\PcGamer\Desktop\Trabalho Andre Poo\backend av2 atualizado\AV2\Application\obj\Debug\net8.0\Application.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\PcGamer\Desktop\Trabalho Andre Poo\backend av2 atualizado\AV2\Application\obj\Debug\net8.0\Application.AssemblyInfoInputs.cache
-C:\Users\PcGamer\Desktop\Trabalho Andre Poo\backend av2 atualizado\AV2\Application\obj\Debug\net8.0\Application.AssemblyInfo.cs
-C:\Users\PcGamer\Desktop\Trabalho Andre Poo\backend av2 atualizado\AV2\Application\obj\Debug\net8.0\Application.csproj.CoreCompileInputs.cache
-C:\Users\PcGamer\Desktop\Trabalho Andre Poo\backend av2 atualizado\AV2\Application\obj\Debug\net8.0\Application.MvcApplicationPartsAssemblyInfo.cache
-C:\Users\PcGamer\Desktop\Trabalho Andre Poo\backend av2 atualizado\AV2\Application\obj\Debug\net8.0\Application.sourcelink.json
