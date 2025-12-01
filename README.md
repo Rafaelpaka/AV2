@@ -1,3 +1,6 @@
+
+diagrama: https://drive.google.com/file/d/19qNkcCAfU2Pa9Y2dakKwfc_t5Y_SlkrK/view?usp=drivesdk
+
 Membros
 João Victor Andrade - 06009925
 
