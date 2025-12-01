@@ -1,3 +1,16 @@
+Membros
+João Victor Andrade - 06009925
+
+Rafael de Alcântara Peçanha Fernandes - 06010477
+
+Carlos Leonardo Carvalho Otoline - 06010109
+
+Andrey Campos - 06009553
+
+Nathan Salles Ramos - 06009233
+
+Vinícius Schonfelder - 06010595
+
 Baixar o .Net 9.0: https://dotnet.microsoft.com/pt-br/download/dotnet/thank-you/sdk-9.0.308-windows-x64-installer
 
 Para rodar o sistema deve acessar o backend 
