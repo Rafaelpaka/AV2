@@ -1,4 +1,6 @@
 
+Video de explicação: https://vimeo.com/1142251210?fl=pl&fe=sh
+
 diagrama: https://drive.google.com/file/d/19qNkcCAfU2Pa9Y2dakKwfc_t5Y_SlkrK/view?usp=drivesdk
 
 Membros
